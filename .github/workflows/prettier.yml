@@ -1,0 +1,43 @@
+name: prettier
+
+on:
+  pull_request:
+    branches:
+    - master
+    - develop
+    - feature/*
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+        fetch-depth: 1
+
+    - name: Cache node modules
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    - name: Install packages using npm
+      run: npm install
+
+    - name: Run prettier
+      run: npm run prettier --write 'resources/**/*.{css,js,vue}'
+
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+
+    - uses: stefanzweifel/git-auto-commit-action@v4.7.2
+      with:
+        commit_message: Apply prettier fixes
+        branch: ${{ github.head_ref }}
