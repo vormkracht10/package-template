@@ -1,4 +1,4 @@
-# :package_description
+# Package template
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/vormkracht10/package-template.svg?style=flat-square)](https://packagist.org/packages/vormkracht10/package-template)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/vormkracht10/package-template/Tests?label=tests)](https://github.com/vormkracht10/package-template/actions?query=workflow%3ATests+branch%3Amaster)
